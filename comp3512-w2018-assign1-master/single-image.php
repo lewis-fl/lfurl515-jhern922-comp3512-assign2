@@ -2,6 +2,7 @@
     //include 'functions/imagePageFunctions.php';
     include 'includes/config.inc.php';
     $imagesDB = new ImagesGateway($connection);
+    $DBGateway = $imagesDB;
     if(!isset($_GET['id']) || empty($_GET['id']))
     {
       header('Location:error.php');

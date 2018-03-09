@@ -54,32 +54,32 @@ abstract class TableDataGateway
         return $exists;
     }
     
-    //just addeed 2:12pm
-    public function displayContinentPanelList(){
-        $sql = "SELECT ContinentName, ContinentCode
-            FROM Continents
-            ORDER BY 1 ASC";
-    $statement = $connection->prepare($sql);
-    $statement->execute();
-    while($row = $statement->fetch()){
-       echo "<li class='list-group-item'><a href='browse-images.php?Continent=".$row['ContinentCode']."'>".$row['ContinentName']."</a></li>"; 
+     public function displayContinentPanelList(){
+                $sql = "SELECT ContinentName, ContinentCode
+                    FROM Continents
+                    ORDER BY 1 ASC";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute();
+            while($row = $statement->fetch()){
+               echo "<li class='list-group-item'><a href='browse-images.php?Continent=".$row['ContinentCode']."'>".$row['ContinentName']."</a></li>"; 
+            }
+        }
+        
+        
+     public function displayCountriesPanelList(){
+            $sql = "SELECT CountryName, ISO 
+                    FROM Countries
+                    INNER JOIN ImageDetails
+                    ON ImageDetails.CountryCodeISO = Countries.ISO
+                    GROUP BY 1
+                    ORDER BY 1 ASC";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute();
+            while($row = $statement->fetch()){
+              echo "<li class='list-group-item'><a href='browse-images.php?Country=".$row['ISO']."'>".$row['CountryName']."</a></li>"; 
             }
         }
 
-    //just addeed 2:12pm
-    public function displayCountriesPanelList(){
-       $sql = "SELECT CountryName, ISO 
-                FROM Countries
-                INNER JOIN ImageDetails
-                ON ImageDetails.CountryCodeISO = Countries.ISO
-                GROUP BY 1
-                ORDER BY 1 ASC";
-        $statement = $connection->prepare($sql);
-        $statement->execute();
-        while($row = $statement->fetch()){
-          echo "<li class='list-group-item'><a href='browse-images.php?Country=".$row['ISO']."'>".$row['CountryName']."</a></li>"; 
-            }
-         }
     
     function printRelatedImages($id){
       $sql = "SELECT ImageID, Title, Path
@@ -120,6 +120,11 @@ abstract class TableDataGateway
     function closeDB(){
         $this->connection = null;
         // $GLOBALS['pdo'] = null;
+    }
+    
+    public function testFind($sql) {
+        $statement = DatabaseHelper::runQuery($this->connection, $sql, null);
+        return $statement->fetch();
     }
 }
 

@@ -3,7 +3,7 @@
             <div class="container">
                 <div class="pull-right">
                     <ul class="list-inline">
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="login.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
                     </ul>
@@ -37,6 +37,7 @@
                                 <li><a href="browse-countries.php">Countries</a></li>
                                 <li><a href="browse-images.php">Images</a></li>
                                 <li><a href="browse-users.php">Users</a></li>
+                                <li><a href="browse-posts.php">Posts</a></li>
                             </ul>
                         </li>
                     </ul>
