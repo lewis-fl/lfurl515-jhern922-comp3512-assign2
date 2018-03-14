@@ -14,14 +14,20 @@
 
 <body>
 
-     <?php include 'includes/header.inc.php'; ?>
+     <?php 
+     if(isset($_COOKIE['Success'])) {
+              include 'includes/header.inc.php';
+     }else {
+         include 'includes/header2.inc.php';
+     }
+     ?>
      
     <!-- Page Content -->
     <main class="container">
         <!-- Start jumbotron -->
         <div class="jumbotron">
-              <h1 class="display-3">About Me</h1>
-                  <p class="lead">This assignment was created by yours truly... John Hernandez. It was created as the first assignment for COMP 3512.</p>
+              <h1 class="display-3">About Us</h1>
+                  <p class="lead">This assignment was created by Lewis Furlan-Lowry and John Hernandez. It was created as the second assignment for COMP 3512.</p>
                       <hr class="my-4">
                         <h3 class="display-3">External Resources used</h3>
                                         

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php if(!isset($_COOKIE['Success'])) { header("location: login.php"); } ?>
 <head>
     <meta charset="utf-8">
     <title>Browse Posts</title>
@@ -14,8 +15,8 @@
 <body>
    <?php include "includes/header.inc.php"; 
          include "includes/config.inc.php";
-         $postsDB = new PostsGateway($connection);
-         $DBGateway = $postsDB;?>
+         $imagesDB = new PostsGateway($connection);
+         $DBGateway = $imagesDB;?>
     <!-- Page Content -->
     <main class="container">
         <div class="row">
@@ -28,7 +29,7 @@
                 </div>        
                  <!-- start post summaries -->
                  <div class="postlist">
-                        <?php $results = $postsDB->findAll("PostTime DESC");
+                        <?php $results = $imagesDB->findAll("PostTime DESC");
                          foreach ($results AS $row)  {?>
                         
                         <div class='row'>
@@ -41,7 +42,7 @@
                                             Posted by: <a href="single-user.php?id=<?php echo $row['UserID'];?>"><?php echo $row['FullName'];?></a>
                                             <span class="pull-right"><?php echo  date("M d, Y", strtotime($row['PostTime']));?></span>
                                             </div>
-                                                <p class="excerpt"><?php echo substr($row['Message'],0,250);?></p>
+                                                <p class="excerpt"><?php echo substr($row['Message'],0,350);?>...</p> <!-- added to the end of the excerpt --> 
                                          <p class="pull-right">
                                             <a href="single-post.php?id=<?php echo $row['PostID'];?>" class="btn btn-primary btn-sm">Read more</a>
                                          </p>

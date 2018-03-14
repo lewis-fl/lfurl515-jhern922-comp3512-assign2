@@ -10,44 +10,25 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/captions.css" />
     <link rel="stylesheet" href="css/bootstrap-theme.css" />    
-    <link rel="stylesheet" href="css/myown.css" /> 
+    <link rel="stylesheet" href="css/myown.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <?php include 'includes/header.inc.php'; 
-      include 'includes/config.inc.php'; 
-      $userdb = new UsersGateway($connection); 
-      $sql = "SELECT Salt FROM UsersLogin WHERE UserName = 'patrick.gray@aol.com'"; 
-      $row = $userdb->testFind($sql); 
-      $saltTest = "$row[Salt]"; 
-      $trytest = "abcd1234";
-      $trytest .= $saltTest;
-      //$saltTest .= "abcd1234";
-      //$saltTest = md5($saltTest);
-      $trytest = md5($trytest);
-      //echo "$saltTest";
-      echo "$trytest";
-      ?>
+    <?php 
+          if(isset($_COOKIE['Success'])) {
+              include 'includes/header.inc.php';
+              include 'includes/logout-form.inc.php';
+          }else {
+              include 'includes/header2.inc.php';
+              $email = "";
+              if(isset($_COOKIE['Failed'])) { $email = $_COOKIE['UserName']; include 'includes/fail-banner.inc.php'; }
+              include 'includes/login-form.inc.php';
+          }
+    ?>
     
     <!-- Page Content -->
     
-    <main class="container">
-            <div class="row">
-                <div class="col-md-offset-5 col-md-3">
-                    <div class="form-login">
-                        <h3 class="navbar-brand">Welcome back.</h3>
-                        <input type="text" id="userName" class="form-control input chat-input" placeholder="username" />
-                        </br>
-                        <input type="text" id="userPassword" class="form-control input chat-input" placeholder="password" />
-                        </br>
-                        <div class="wrapper">
-                            <span class="group-btn">     
-                            <a href="#" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </main>
+   
     
     
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>

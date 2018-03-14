@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php if(!isset($_COOKIE['Success'])) { header("location: login.php"); } ?>
 <head>
     <meta charset="utf-8">
     <title>Main Page</title>

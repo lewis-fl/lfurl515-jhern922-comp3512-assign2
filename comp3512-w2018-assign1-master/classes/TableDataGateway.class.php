@@ -82,18 +82,18 @@ abstract class TableDataGateway
 
     
     function printRelatedImages($id){
-      $sql = "SELECT ImageID, Title, Path
-            FROM ImageDetails
-            WHERE ". $this->getForeignKey() ."=:id
-            ORDER BY 1 ASC";
-    $statement = DatabaseHelper::runQuery($this->connection, $sql, Array(':id' => $id));
-    while($row = $statement->fetch()){
-         $this->printSmallImage($row['Path'],$row['Title'],$row['ImageID']);
-    } 
-    $this->closeDB();
-    }
-    function printSmallImage($path,$title,$id) {
-        echo "<a href='single-image.php?id=$id'><img src='images/square-small/$path' title='$title' alt='$title' class='img-thumbnail'></a>";
+                  $sql = "SELECT ImageID, Title, Path
+                        FROM ImageDetails
+                        WHERE ". $this->getForeignKey() ."=:id
+                        ORDER BY 1 ASC";
+                $statement = DatabaseHelper::runQuery($this->connection, $sql, Array(':id' => $id));
+                while($row = $statement->fetch()){
+                     $this->printSmallImage($row['Path'],$row['Title'],$row['ImageID']);
+                } 
+                $this->closeDB();
+                }
+     function printSmallImage($path,$title,$id) {
+         echo "<a href='single-image.php?id=$id'><img src='images/square-small/$path' title='$title' alt='$title' class='img-thumbnail'></a>";
     }
     
     function printResultsInTable() {
@@ -119,13 +119,13 @@ abstract class TableDataGateway
     
     function closeDB(){
         $this->connection = null;
-        // $GLOBALS['pdo'] = null;
     }
     
-    public function testFind($sql) {
-        $statement = DatabaseHelper::runQuery($this->connection, $sql, null);
-        return $statement->fetch();
-    }
+    // not sure if this was just used for testing
+    // public function testFind($sql) {
+    //    $statement = DatabaseHelper::runQuery($this->connection, $sql, null);
+    //    return $statement->fetch();
+    //}
 }
 
 

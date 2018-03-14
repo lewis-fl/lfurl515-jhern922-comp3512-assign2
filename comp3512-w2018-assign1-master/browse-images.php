@@ -1,4 +1,5 @@
 <?php
+    if(!isset($_COOKIE['Success'])) { header("location: login.php"); }
 //include 'functions/helperFunctions.php';
     include 'includes/config.inc.php';
     $imagesDB = new ImagesGateway($connection);

@@ -1,4 +1,5 @@
 <?php
+    if(!isset($_COOKIE['Success'])) { header("location: login.php"); } 
     include 'includes/config.inc.php';
     $countrydb = new CountriesGateway($connection);
     if(!isset($_GET['id']) || empty($_GET['id']))
