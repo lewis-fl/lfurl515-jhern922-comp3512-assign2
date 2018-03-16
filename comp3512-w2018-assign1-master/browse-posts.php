@@ -15,8 +15,8 @@
 <body>
    <?php include "includes/header.inc.php"; 
          include "includes/config.inc.php";
-         $imagesDB = new PostsGateway($connection);
-         $DBGateway = $imagesDB;?>
+         $postsDB = new PostsGateway($connection);
+         $DBGateway = $postsDB;?>
     <!-- Page Content -->
     <main class="container">
         <div class="row">
@@ -29,7 +29,7 @@
                 </div>        
                  <!-- start post summaries -->
                  <div class="postlist">
-                        <?php $results = $imagesDB->findAll("PostTime DESC");
+                        <?php $results = $postsDB->findAll("PostTime DESC");
                          foreach ($results AS $row)  {?>
                         
                         <div class='row'>

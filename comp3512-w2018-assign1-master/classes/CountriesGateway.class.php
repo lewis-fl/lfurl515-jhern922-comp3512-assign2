@@ -6,7 +6,7 @@ class CountriesGateway extends TableDataGateway {
     }
     
     protected function getSelectStatement() {
-        return "SELECT ISO, CountryName, Capital, Area, Population, CurrencyName, CountryDescription 
+        return "SELECT ISO, CountryName, Capital, Area, Population, CurrencyName, CountryDescription, Longitude, Latitude 
         FROM Countries 
         INNER JOIN ImageDetails ON ImageDetails.CountryCodeISO = Countries.ISO ";
     }

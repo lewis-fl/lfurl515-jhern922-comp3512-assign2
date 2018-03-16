@@ -13,7 +13,6 @@
     else
     {
        $row = $countrydb->findById($_GET['id']);
-       // $row = getCountryInfo($_GET['id']);
     }
 ?>
 <!DOCTYPE html>
@@ -42,6 +41,7 @@
                 <p>Population: <b><?php echo number_format($row['Population']); ?></b></p>
                 <p>Currency Name: <b><?php echo $row['CurrencyName'] ?></p><br>
                 <p><?php echo $row['CountryDescription']; ?></p>
+                <img src='https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $row['CountryName'].',+'.$row['Capital']; ?>&size=600x300'
             </div>
             <div class="panel panel-info">
                 <div class='panel-heading'><h3>Images from <?php echo $row['CountryName']; ?></h3></div>

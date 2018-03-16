@@ -1,45 +1,44 @@
 <?php
     if(!isset($_COOKIE['Success'])) { header("location: login.php"); }
-//include 'functions/helperFunctions.php';
     include 'includes/config.inc.php';
     $imagesDB = new ImagesGateway($connection);
-   if(((!isset($_GET['Continent'])) && (!isset($_GET['Country'])) && (!isset($_GET['City'])) && (!isset($_GET['Text']))) || (($_GET['Continent'] == '-1') && ($_GET['Country'] == '-1') && ($_GET['City'] == '-1') && (empty($_GET['Title'])))){
+   if((!isset($_GET['Continent']) || ($_GET['Continent']=='-1')) && (!isset($_GET['Country']) || $_GET['Country']=='-1') && (!isset($_GET['City']) || $_GET['City']=='-1') && (!isset($_GET['Title']) || empty($_GET['Title']))){
         $filterType = 'All';
         $filterValue = 'All';
         $sql = $imagesDB->formSQLQuery($filterType, null);
         $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
-   else if(((isset($_GET['Continent'])) && ($_GET['Continent'] != '-1') && (!empty($_GET['Continent'])) && (!$imagesDB->IDExists($_GET['Continent'],'Continents','ContinentCode'))) || ((isset($_GET['Country'])) && ($_GET['Country'] != '-1') &&  (!empty($_GET['Country'])) && (!$imagesDB->IDExists($_GET['Country'],'Countries','ISO'))) || ((isset($_GET['City']))  && ($_GET['City'] != '-1') && (!empty($_GET['City'])) && (!$imagesDB->IDExists($_GET['City'],'Cities','CityCode'))))
-   {
-        header('Location:error.php?error=invalidID'); 
-   }
-   else if(isset($_GET['Continent']) && $imagesDB->IDExists($_GET['Continent'],'Continents','ContinentCode') && !empty($_GET['Continent']))
+   //else if(((isset($_GET['Continent'])) && ($_GET['Continent'] != '-1') && (!empty($_GET['Continent'])) && (!$imagesDB->IDExists($_GET['Continent'],'Continents','ContinentCode'))) || ((isset($_GET['Country'])) && ($_GET['Country'] != '-1') &&  (!empty($_GET['Country'])) && (!$imagesDB->IDExists($_GET['Country'],'Countries','ISO'))) || ((isset($_GET['City']))  && ($_GET['City'] != '-1') && (!empty($_GET['City'])) && (!$imagesDB->IDExists($_GET['City'],'Cities','CityCode'))))
+   //{
+//        header('Location:error.php?error=invalidID'); 
+//   }
+   else if(isset($_GET['Continent']) && !empty($_GET['Continent']) && ($_GET['Continent']!='-1'))
    {
        $filterType = 'Continent';
        $filterValue = $filterType."=".$_GET['Continent'];
        $sql = $imagesDB->formSQLQuery($filterType,$_GET['Continent']);
-       $statement = $imagesDB->getStatement($sql);
+       $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
-   else if(isset($_GET['Country']) && $imagesDB->IDExists($_GET['Country'],'Countries','ISO') && !empty($_GET['Country']))
+   else if(isset($_GET['Country']) && !empty($_GET['Country']) && ($_GET['Country']!='-1'))
    {
        $filterType = 'Country';
        $filterValue = $filterType."=".$_GET['Country'];
        $sql = $imagesDB->formSQLQuery($filterType,$_GET['Country']);
-       $statement = $imagesDB->getStatement($sql);
+       $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
-   else if(isset($_GET['City']) && $imagesDB->IDExists($_GET['City'],'Cities','CityCode') && !empty($_GET['City']))
+   else if(isset($_GET['City'])  && !empty($_GET['City']) && ($_GET['City']!='-1') )
    {
        $filterType = 'City';
        $filterValue = $filterType."=".$_GET['City'];
        $sql = $imagesDB->formSQLQuery($filterType,$_GET['City']);
-       $statement = $imagesDB->getStatement($sql);
+       $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
    else if(isset($_GET['Title']) && !empty($_GET['Title']))
    {
        $filterType = 'Text';
        $filterValue = $filterType."=".$_GET['Title'];
        $sql = $imagesDB->formSQLQuery($filterType,$_GET['Title']);
-       $statement = $imagesDB->getStatement($sql);
+       $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
 ?>
 
@@ -71,24 +70,24 @@
               <div class="form-inline">
               <select name="Continent" class="form-control">
                 <option value="-1">Select Continent</option>
-                <?php $sql = formSQLQuery('ContinentList', null);
-                $result = getStatement($sql);
+                <?php $sql = $imagesDB->formSQLQuery('ContinentList', null);
+                $result = DatabaseHelper::runQuery($connection, $sql, null);
                 while ($row = $result->fetch()) {
                 echo "<option value='".$row["ContinentCode"]. "'>".$row['ContinentName']."</option>"; }?>
               </select>     
               
               <select name="Country" class="form-control">
                 <option value="-1">Select Country</option>
-                <?php $sql = formSQLQuery('CountryList', null);
-                $result = getStatement($sql);
+                <?php $sql = $imagesDB->formSQLQuery('CountryList', null);
+                $result = DatabaseHelper::runQuery($connection, $sql, null);
                 while ($row = $result->fetch()) {
                 echo "<option value='".$row['ISO']."'>".$row['CountryName']."</option>"; } ?>
               </select>  
                             
               <select name="City" class="form-control">
                 <option value="-1">Select City</option>
-                <?php  $sql = formSQLQuery('CityList', null);
-                $result = getStatement($sql);
+                <?php  $sql = $imagesDB->formSQLQuery('CityList', null);
+                $result = DatabaseHelper::runQuery($connection, $sql, null);
                 while ($row = $result->fetch()) {
                 echo "<option value='".$row['CityCode']."'>".$row['AsciiName']."</option>";} ?>
               </select> 
@@ -117,7 +116,7 @@
                                       </div>
                               </a>
                               </li> 
-                              <?php } closeDB(); ?>
+                              <?php } $imagesDB->closeDB(); ?>
                         </ul>
                     </div>   
                 </div>
