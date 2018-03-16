@@ -45,6 +45,7 @@ abstract class TableDataGateway
         return $statement->fetch();
     }
     
+    //ide exists needs to be created more dynamic for any table
     public function IDExists($id) {
         $exists = false;
         $row = $this->findById($id);
