@@ -45,11 +45,26 @@ abstract class TableDataGateway
         return $statement->fetch();
     }
     
-    //ide exists needs to be created more dynamic for any table..
-    public function IDExists($id) {
+    //NOTE ! Please note that the query used in the findByID function will be associated to the instance of the gateway object  
+   public function IDExists($id) {
         $exists = false;
         $row = $this->findById($id);
         if($row) {
+            $exists = true;
+        }
+        return $exists;
+    }
+    
+    //checks if the passed ID exists this function is not dependent on the instance of the gateway object. This funciton is compatible to any table that has the ID as the primary key(unique)
+    //$id = the id value that will be used in the sQL where clause
+    //$table = the name of the table where the id value will be looked for
+    //$colName = the name of the column where the id value will be looked against
+    public function IDExistsExplicit($id,$table,$colName){
+        $exists = false;
+        $sql = "SELECT ".$colName." FROM ".$table." WHERE ".$colName."='".$id."'";
+        $result = DatabaseHelper::runQuery($this->connection, $sql, null);
+        $row = $result->fetch(); //this should only pick up one row since ID is uniquely identified( ID value passed in is from a primary key)
+        if($row){
             $exists = true;
         }
         return $exists;
@@ -92,7 +107,9 @@ abstract class TableDataGateway
                      $this->printSmallImage($row['Path'],$row['Title'],$row['ImageID']);
                 } 
                 $this->closeDB();
-                }
+    }
+                
+                
      function printSmallImage($path,$title,$id) {
          echo "<a href='single-image.php?id=$id'><img src='images/square-small/$path' title='$title' alt='$title' class='img-thumbnail'></a>";
     }
@@ -121,12 +138,6 @@ abstract class TableDataGateway
     function closeDB(){
         $this->connection = null;
     }
-    
-    // not sure if this was just used for testing
-    // public function testFind($sql) {
-    //    $statement = DatabaseHelper::runQuery($this->connection, $sql, null);
-    //    return $statement->fetch();
-    //}
 }
 
 
