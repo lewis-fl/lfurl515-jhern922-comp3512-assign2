@@ -29,3 +29,9 @@
     padding-bottom: 0em !important;
 }
 
+/******Might be able to use this for the single post to resize the images to fit the Carousel******/
+/*.imagecl4 {*/
+/*    height: 100%; */
+/*    width: 100%; */
+/*    object-fit: contain;*/
+/*}*/

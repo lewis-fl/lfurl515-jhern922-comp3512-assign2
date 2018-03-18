@@ -1,4 +1,6 @@
 <?php
+    include 'classes/postFavorite.class.php';
+    session_start();
     if(!isset($_COOKIE['Success'])) { header("location: login.php"); } 
     include 'includes/config.inc.php';
     $postsDB = new PostsGateway($connection);
@@ -13,6 +15,14 @@
     else
     {
        $row = $postsDB->findByID($_GET['id']);
+       $pPath = $row['Path'];
+       $pTitle = $row['Title'];
+    }
+    function postAdd() {
+      global $pTitle;
+      global $pPath;
+      $postF = new postFavorite($pTitle,$pPath);
+      array_push($_SESSION['postFavs'],$postF);
     }
 ?>
 <!DOCTYPE html>
@@ -23,7 +33,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet" type='text/css'>
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css" />-->
+    <link rel="stylesheet" href="css/as2.min.css" />
     <link rel="stylesheet" href="css/captions.css" />
     <link rel="stylesheet" href="css/bootstrap-theme.css" />    
     <link rel="stylesheet" href="css/myown.css"/>
@@ -31,7 +44,7 @@
 </head>
 
 <body>
-    <?php include 'includes/header.inc.php';?>
+    <?php include 'includes/header.inc.php'; ?>
     <?php $results = $postsDB->getRelatedPostImages($_GET['id']); ?>
     <!-- Page Content -->
     <main class="container">
@@ -82,7 +95,20 @@
         <span class="sr-only">Next</span>
       </a>
     </div><!-- Carousel end -->
-                
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" onclick="faveAdd"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
+                      </div>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
+                      </div>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-print" aria-hidden="true"></span></button>
+                      </div>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+                      </div>
+                  </div>
                     <h6>Posted by: <a href="single-user.php?id=<?php echo $row['UserID'];?>"><?php echo $row['FullName'];?></a></h6>
                     <h6><?php echo date("M d, Y", strtotime($row['PostTime']));?></h6>
                     <p class="excerpt"><?php echo $row['Message'];?></p> 
@@ -102,6 +128,12 @@
     </footer>
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script>
+            
+              var faveAdd = document.getElementById('button1').onclick = function() {
+                var pf = <?php echo postAdd();?>;
+            };
+        </script>
 </body>
 
 </html>

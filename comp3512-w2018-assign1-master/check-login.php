@@ -25,6 +25,9 @@ function checkPassword($pass,$logindb) {
         setcookie("Failed",'',-1);
         setcookie("Success",true,0);
         setcookie("UserID",$loginSuccess[1],0);
+        session_start();
+        $_SESSION["imgFavs"] = array();
+        $_SESSION["postFavs"] = array();
         header("location: index.php");
     }else {
         $fail = true;

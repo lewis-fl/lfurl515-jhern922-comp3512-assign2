@@ -1,19 +1,47 @@
 .topHeaderRow {
-  background-color: #1A237E;
+  background-color: #40C2FA;
+  border-color: #71afca;
   height: 3em;
   font-size: 0.8em;
   padding-top: 1em;
 }
+
+.topHeaderRow2 {
+  background-color: #FFF;
+  border-color: #71afca;
+  height: 0.25em;
+  font-size: 0.4em;
+  padding-top: 0;
+}
+
+#footerRow {
+    padding-top: 0;
+}
+
+#footP {
+    padding-top: 10px;
+}
+
+#footP2 {
+    padding-bottom: 25px;
+}
+
 .topHeaderRow  a:link { 
-  color: #E8EAF6;
+  color: #FFF;
 }
 .topHeaderRow  a:hover { 
-  color: #40C4FF;
+  color: #2982aa;
 }
 
 .navbar-brand {
-    font-family: lobster, serif;
+    /*font-family: lobster, serif;*/
+    font-family: 'Raleway', Helvetica, Arial, sans-serif;
     font-size: 32px;
+}
+
+#border-wrap {
+    border:1px solid;
+    border-color:  #006c9e;
 }
 
 .description {
@@ -44,14 +72,15 @@
 }
 
 footer {
-   background-color:  #303F9F;  
-    color: #E8EAF6;
+   background-color:  #40C2FA;  
+    color: #FFF;
     font-size: 80%;
+    margin-top: 20px;
 }
 footer .final {
         padding-top: 10px;
 margin-top: 10px;
-    background-color:  #1A237E; 
+    background-color:  #89bdd3; 
     text-align: center;
 }
 
@@ -60,7 +89,9 @@ footer hr {
 }
 
 #postJumbo {
- background-image: url(../images/plane-flying-sunset-wallpaper.jpg);
+ background-image: url(../images/vacayz.jpg);
+ background-position: left center; 
+ 
 }
 #postJumbo h1, h2 {
    margin-top: 0;

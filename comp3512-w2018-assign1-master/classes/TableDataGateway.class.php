@@ -97,7 +97,7 @@ abstract class TableDataGateway
         }
 
     
-    function printRelatedImages($id){
+    public function printRelatedImages($id){
                   $sql = "SELECT ImageID, Title, Path
                         FROM ImageDetails
                         WHERE ". $this->getForeignKey() ."=:id
@@ -110,11 +110,13 @@ abstract class TableDataGateway
     }
                 
                 
-     function printSmallImage($path,$title,$id) {
+    public function printSmallImage($path,$title,$id) {
          echo "<a href='single-image.php?id=$id'><img src='images/square-small/$path' title='$title' alt='$title' class='img-thumbnail'></a>";
     }
     
-    function printResultsInTable() {
+
+    
+    public function printResultsInTable() {
     $page = $this->getPageName();
     $results = $this->findAllSorted(true);
     $idName = $this->getPrimaryKeyName();
@@ -135,7 +137,7 @@ abstract class TableDataGateway
     $this->closeDB();
     }
     
-    function closeDB(){
+    public function closeDB(){
         $this->connection = null;
     }
 }
