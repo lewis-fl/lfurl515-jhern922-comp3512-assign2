@@ -4,7 +4,7 @@
     $imagesDB = new ImagesGateway($connection);
    if((!isset($_GET['Continent']) || ($_GET['Continent']=='-1')) && (!isset($_GET['Country']) || $_GET['Country']=='-1') && (!isset($_GET['City']) || $_GET['City']=='-1') && (!isset($_GET['Title']) || empty($_GET['Title']))){
         $filterType = 'All';
-        $filterValue = 'All';
+        $filterValue = '[All]';
         $sql = $imagesDB->formSQLQuery($filterType, null);
         $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
@@ -15,28 +15,28 @@
    else if(isset($_GET['Continent']) && !empty($_GET['Continent']) && ($_GET['Continent']!='-1') && $imagesDB->IDExistsExplicit($_GET['Continent'],'Continents','ContinentCode'))
    {
        $filterType = 'Continent';
-       $filterValue = $filterType."=".$_GET['Continent'];
+       $filterValue = "where ".$filterType."=".$_GET['Continent'];
        $sql = $imagesDB->formSQLQuery($filterType,$_GET['Continent']);
        $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
    else if(isset($_GET['Country']) && !empty($_GET['Country']) && ($_GET['Country']!='-1') && $imagesDB->IDExistsExplicit($_GET['Country'],'Countries','ISO'))
    {
        $filterType = 'Country';
-       $filterValue = $filterType."=".$_GET['Country'];
+       $filterValue = "where ".$filterType."=".$_GET['Country'];
        $sql = $imagesDB->formSQLQuery($filterType,$_GET['Country']);
        $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
    else if(isset($_GET['City'])  && !empty($_GET['City']) && ($_GET['City']!='-1') && $imagesDB->IDExistsExplicit($_GET['City'],'Cities','CityCode') )
    {
        $filterType = 'City';
-       $filterValue = $filterType."=".$_GET['City'];
+       $filterValue = "where ".$filterType."=".$_GET['City'];
        $sql = $imagesDB->formSQLQuery($filterType,$_GET['City']);
        $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
    else if(isset($_GET['Title']) && !empty($_GET['Title']))
    {
        $filterType = 'Text';
-       $filterValue = "Title contains the text ".$_GET['Title'];
+       $filterValue = "where Title contains the text '".$_GET['Title']."'";
        $sql = $imagesDB->formSQLQuery($filterType,$_GET['Title']);
        $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
@@ -103,7 +103,7 @@
         </div>    
             
                 <div class="panel panel-default">
-                    <div class="panel-heading">Displaying <?php echo $statement->rowCount().' Image(s) where '.$filterValue.''; ?></div>
+                    <div class="panel-heading">Displaying <?php echo $statement->rowCount().' Image(s) '.$filterValue.''; ?></div>
                      <div class="panel-body">
                      	<ul class="caption-style-2">
                      	    <?php while($row = $statement->fetch()){ ?>
