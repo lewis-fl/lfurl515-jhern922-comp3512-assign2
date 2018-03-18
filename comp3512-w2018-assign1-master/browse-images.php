@@ -15,23 +15,30 @@
    else if(isset($_GET['Continent']) && !empty($_GET['Continent']) && ($_GET['Continent']!='-1') && $imagesDB->IDExistsExplicit($_GET['Continent'],'Continents','ContinentCode'))
    {
        $filterType = 'Continent';
-       $filterValue = "where ".$filterType."=".$_GET['Continent'];
+       $continentNameSQL = $imagesDB->formSQLQuery('ContinentName',$_GET['Continent']);
+       $retrieveContinentName = DatabaseHelper::runQuery($connection, $continentNameSQL, null); //this statement is used to display the ascii name of the Country
+       $continentRow = $retrieveContinentName->fetch();
+       $filterValue = "where ".$filterType."=".$continentRow['ContinentName'];
        $sql = $imagesDB->formSQLQuery($filterType,$_GET['Continent']);
        $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
    else if(isset($_GET['Country']) && !empty($_GET['Country']) && ($_GET['Country']!='-1') && $imagesDB->IDExistsExplicit($_GET['Country'],'Countries','ISO'))
    {
        $filterType = 'Country';
-       $filterValue = "where ".$filterType."=".$_GET['Country'];
        $sql = $imagesDB->formSQLQuery($filterType,$_GET['Country']);
+       $retrieveCountryName = DatabaseHelper::runQuery($connection, $sql, null); //this statement is used to display the ascii name of the Country
+       $countryRow = $retrieveCountryName->fetch();
+       $filterValue = "where ".$filterType."=".$countryRow['CountryName'];
        $statement = DatabaseHelper::runQuery($connection, $sql, null);
    }
    else if(isset($_GET['City'])  && !empty($_GET['City']) && ($_GET['City']!='-1') && $imagesDB->IDExistsExplicit($_GET['City'],'Cities','CityCode') )
    {
        $filterType = 'City';
-       $filterValue = "where ".$filterType."=".$_GET['City'];
        $sql = $imagesDB->formSQLQuery($filterType,$_GET['City']);
-       $statement = DatabaseHelper::runQuery($connection, $sql, null);
+       $retrieveCityName = DatabaseHelper::runQuery($connection, $sql, null); //this statement is used to display the ascii name of the city
+       $asciiRow = $retrieveCityName->fetch();
+       $filterValue = "where ".$filterType."=".$asciiRow['AsciiName'];
+       $statement = DatabaseHelper::runQuery($connection, $sql, null); //this statement will be used to display the images
    }
    else if(isset($_GET['Title']) && !empty($_GET['Title']))
    {

@@ -41,21 +41,21 @@ class ImagesGateway extends TableDataGateway {
                                 FROM ImageDetails
                                 ORDER BY 1 ASC";
                                 break;
-        case 'Continent':       $sql = "SELECT ImageID, Title, Path
+        case 'Continent':       $sql = "SELECT ImageID, Title, Path, ContinentName
                                 FROM ImageDetails
                                 INNER JOIN Continents
                                 ON Continents.ContinentCode = ImageDetails.ContinentCode
                                 WHERE ImageDetails.ContinentCode='$id'
                                 ORDER BY 1 ASC";
                                 break;
-        case 'Country':         $sql = "SELECT ImageID, Title, Path
+        case 'Country':         $sql = "SELECT ImageID, Title, Path, CountryName
                                 FROM ImageDetails
                                 INNER JOIN Countries
                                 ON Countries.ISO = ImageDetails.CountryCodeISO
                                 WHERE ImageDetails.CountryCodeISO='$id'
                                 ORDER BY 1 ASC";
                                 break;
-        case 'City':            $sql = "SELECT ImageID, Title, Path
+        case 'City':            $sql = "SELECT ImageID, Title, Path, AsciiName
                                 FROM ImageDetails
                                 INNER JOIN Cities
                                 ON Cities.CityCode = ImageDetails.CityCode
@@ -66,6 +66,10 @@ class ImagesGateway extends TableDataGateway {
                                 FROM ImageDetails
                                 WHERE ImageDetails.Title LIKE '%$id%'
                                 ORDER BY 1 ASC";
+                                break;
+        case 'ContinentName':   $sql = "SELECT * 
+                                FROM Continents
+                                WHERE ContinentCode='$id'";
                                 break;
         case 'ContinentList':   $sql = "SELECT * 
                                 FROM Continents";
