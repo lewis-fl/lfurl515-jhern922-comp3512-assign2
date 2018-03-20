@@ -20,7 +20,8 @@
        }
        if(isset($_GET['favorite']) && !empty($_GET['favorite']) && $_GET['favorite'] == 1)
        {
-           array_push($_SESSION['imageFavList'], array('ID'=>$row['ImageID'],'Title'=>$row['Title'],'Path'=>$row['Path']));
+           //this will not check whether or not there are duplicate favorites
+        array_push($_SESSION['imageFavList'], array('ID'=>$row['ImageID'],'Title'=>$row['Title'],'Path'=>$row['Path']));
        }
     }
 ?>
@@ -59,6 +60,23 @@
                     <div class="col-md-8">                                                
                         <img class="img-responsive" src="images/medium/<?php echo $row['Path']; ?>" alt=<?php echo $row["Title"];?>> 
                         <p class="description"><?php echo $row["descrip"]; ?></p>
+                        <div id="map" class="col-md-4"></div>
+                        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLsRJ-w6LkrM_sAcEp8IuGzjxm77Jc9oQ&callback=initMap"></script>
+                        <script>
+                        var long = parseFloat(<?php echo $row['Longitude']; ?>);
+                        var latitude = parseFloat(<?php echo $row['Latitude']; ?>);
+                        function initMap() {
+                            var uluru = {lat: latitude, lng: long}; 
+                            var map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 4,
+                                center: uluru 
+                            });
+                            var marker = new google.maps.Marker({
+                                position: uluru,
+                                map: map
+                            });
+                        }
+                        </script>
                     </div>
 
                     <div class="col-md-4">                                                
@@ -74,7 +92,7 @@
                         </div>
                         <div class="btn-group btn-group-justified" role="group" aria-label="...">
                             <div class="btn-group" role="group">
-                              <a href="single-image.php?id=<?php echo $row['ImageID'];?>&favorite=1"><button type='button' id='favItem' class='btn btn-default'><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button></a>
+                              <a href="single-image.php?id=<?php sleep(5); echo $row['ImageID'];?>&favorite=1"><button type='button' id='favItem' class='btn btn-default'><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button></a>
                             </div>
                             <div class="btn-group" role="group">
                                 <button type="button" id='futureBtn'  class="btn btn-default"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>

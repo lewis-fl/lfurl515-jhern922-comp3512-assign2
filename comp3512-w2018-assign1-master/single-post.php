@@ -119,7 +119,8 @@
                     <h6><?php echo date("M d, Y", strtotime($row['PostTime']));?></h6>
                     <p class="excerpt"><?php echo $row['Message'];?></p> 
                 </div>  <!-- end row -->
-            </div>  <!-- end main content area -->
+            </div><!-- end main content area -->
+            </div>
         </div>
     </main>
     
