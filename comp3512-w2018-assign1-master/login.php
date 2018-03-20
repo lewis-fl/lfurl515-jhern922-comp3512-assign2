@@ -5,11 +5,8 @@
     <meta charset="utf-8">
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet" type='text/css'>
-    <!--<link rel="stylesheet" href="css/bootstrap.min.css" />-->
     <link rel="stylesheet" href="css/as2.min.css" />
     <link rel="stylesheet" href="css/captions.css" />
     <link rel="stylesheet" href="css/bootstrap-theme.css" />    

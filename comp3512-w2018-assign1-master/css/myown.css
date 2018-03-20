@@ -29,9 +29,36 @@
     padding-bottom: 0em !important;
 }
 
-/******Might be able to use this for the single post to resize the images to fit the Carousel******/
-/*.imagecl4 {*/
-/*    height: 100%; */
-/*    width: 100%; */
-/*    object-fit: contain;*/
-/*}*/
+
+#preview {
+	position:absolute;
+	border:1px solid #ccc;
+	background:#FFF;
+	padding:5px;
+	display:none;
+	color:#333;
+	}
+	
+	
+.makeItDisappear {
+-webkit-filter: opacity(0);
+-webkit-transition: -webkit-filter 1.5s;
+
+filter: opacity(0);
+transition-duration: 1.5s;
+transition-property: filter -webkit-filter;
+}	
+	
+/*simple work around for all the images to contain within the carousel width wise. If this was a live website - all images should be resized to the same dimension*/
+.imagecl4 {
+    width: 100%; 
+    object-fit: contain;
+}
+
+iframe {
+    min-height: 450px;
+    max-height: 450px;
+    width:100%;
+    display: block;
+    object-fit: contain;
+}

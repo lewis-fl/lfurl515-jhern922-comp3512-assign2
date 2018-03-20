@@ -5,11 +5,8 @@
     <meta charset="utf-8">
     <title>Main Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet" type='text/css'>
-    <!--<link rel="stylesheet" href="css/bootstrap.min.css" />-->
     <link rel="stylesheet" href="css/as2.min.css" />
     <link rel="stylesheet" href="css/captions.css" />
     <link rel="stylesheet" href="css/bootstrap-theme.css" />    
@@ -41,7 +38,7 @@
                  <div class="card col-sm-3">
                      <a href="images/misc/home_users.jpg"><img src="images/misc/home_users.jpg"  alt="users"></a>
                      <h4>Users</h4>
-                     <p>See information about our contributing users.</p>
+                     <p>See information about contributing users.</p>
                      <hr>
                      <p><a href="browse-users.php">View Users</a></p>
                   </div>
@@ -51,6 +48,7 @@
     <?php include 'includes/footer.inc.php'; ?>
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="/comp3512-w2018-assign1-master/anim.js" type="text/javascript"></script>
 </body>
 
 </html>

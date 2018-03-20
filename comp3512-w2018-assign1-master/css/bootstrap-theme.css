@@ -29,9 +29,19 @@
 .topHeaderRow  a:link { 
   color: #FFF;
 }
+
+.topHeaderRow  a:visited { 
+  color: #FFF;
+}
+
 .topHeaderRow  a:hover { 
   color: #2982aa;
 }
+
+.topHeaderRow  a:active { 
+  color: #FFF;
+}
+
 
 .navbar-brand {
     /*font-family: lobster, serif;*/

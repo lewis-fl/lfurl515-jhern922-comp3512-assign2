@@ -111,11 +111,9 @@ abstract class TableDataGateway
                 
                 
     public function printSmallImage($path,$title,$id) {
-         echo "<a href='single-image.php?id=$id'><img src='images/square-small/$path' title='$title' alt='$title' class='img-thumbnail'></a>";
-    }
-    
+         echo "<a href='single-image.php?id=$id' class='preview' title='$title'><img id='demo' src='images/square-small/$path' title='$title' alt='$title' class='img-thumbnail' /></a>";
 
-    
+    }
     public function printResultsInTable() {
     $page = $this->getPageName();
     $results = $this->findAllSorted(true);
@@ -137,7 +135,7 @@ abstract class TableDataGateway
     $this->closeDB();
     }
     
-    public function closeDB(){
+   public function closeDB(){
         $this->connection = null;
     }
 }
