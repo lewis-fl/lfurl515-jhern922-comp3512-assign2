@@ -41,7 +41,7 @@
                          <h3 class="display-3">Lewis Furlan-Lowry</h3>
                         <div class="panel panel-info">
                         <ul class="list-group">
-                            <li class="list-group-item">Gateway Classes(most)</li>
+                            <li class="list-group-item">Gateway Classes</li>
                             <li class="list-group-item">User Profile</li>
                             <li class="list-group-item">Login/Logout</li>
                             <li class="list-group-item">Bootstrap Theme and Site Design</li>
@@ -59,7 +59,6 @@
                             <li class="list-group-item">Simple Search/Search results</li>
                             <li class="list-group-item">Single Image</li>
                             <li class="list-group-item">Browse Images</li>
-                            <li class="list-group-item">Gateway Classes(some)</li>
                         </ul>
                         </div>
         </div>
