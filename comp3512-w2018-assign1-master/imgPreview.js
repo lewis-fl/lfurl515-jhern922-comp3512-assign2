@@ -1,31 +1,38 @@
-this.imagePreview = function(){	
-		
-		xOffset = 10;
-		yOffset = 30;
-	$("a.preview").hover(function(e){
-		var xlm = $(this).find("img").attr("src");
-		var xpm = xlm.replace("small","medium");
-		this.t = this.title;
-		this.title = "";	
-		var c = (this.t != "") ? "<br/>" + this.t : "";
-		$("body").append("<p id='preview'><img src='"+ xpm +"' alt='Image preview' />"+ c + "</p>");								 
-		$("#preview")
-			.css("top",(e.pageY - xOffset) + "px")
-			.css("left",(e.pageX + yOffset) + "px")
-			.fadeIn("fast");						
-    },
-	function(){
-		this.title = this.t;	
-		$("#preview").remove();
-    });	
-	$("a.preview").mousemove(function(e){
-		$("#preview")
-			.css("top",(e.pageY - xOffset) + "px")
-			.css("left",(e.pageX + yOffset) + "px");
-	});			
+ this.imagePreview = function() {
+    var xOffset= 10;
+    var yOffset = 30;
+    var inputs = document.querySelectorAll("a.preview");
+    inputs.forEach(function(hoverLink) {
+        hoverLink.addEventListener("mouseover",function(e){
+             var xpm = this.querySelector("#demo").getAttribute("src");
+             xpm = xpm.replace("small","medium");
+             this.t = this.title;
+             var c = (this.t != "") ? "<br/>" + this.t : "";
+             
+             var prv = document.getElementById("hArea");
+             prv.innerHTML="<p id='preview'><img src='"+ xpm +"' alt='Image preview' />"+ c +"</p>";
+             var hiddenP = document.querySelector("#preview");
+             hiddenP.style.top = (e.pageY - xOffset) + "px";
+             hiddenP.style.left = (e.pageX + yOffset) + "px";
+             hiddenP.style.display = "block";
+    });
+    // var hoverLink = document.querySelector("a.preview");
+    hoverLink.addEventListener("mousemove",function(e){
+        var hiddenP = document.querySelector("#preview");
+         hiddenP.style.top = (e.pageY - xOffset) + "px";
+         hiddenP.style.left = (e.pageX + yOffset) + "px";
+    });
+    // var hoverLink = document.querySelector("a.preview");
+    hoverLink = document.querySelector("a.preview");
+    hoverLink.addEventListener("mouseout",function(e){
+        var hiddenP = document.querySelector("#preview");
+        hiddenP.style.display = "none";
+    });
+    });
+
 };
-
-
-$(document).ready(function(){
-	imagePreview();
-});
+    
+    window.onload = function() {
+    imagePreview();
+};
+    
